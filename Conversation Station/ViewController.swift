@@ -7,19 +7,34 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var mainTextField: UITextField!
+    let speechSynthesizer = AVSpeechSynthesizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // show the keyboard on launch
+        mainTextField.textInputView.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func speakButtonPressed(sender: UIButton) {
+        let speechUtterance = AVSpeechUtterance(string: mainTextField.text!)
+        
+        // Can control rate, pitch and volume if necessary. maybe a settings page?
+//        speechUtterance.rate = rate
+//        speechUtterance.pitchMultiplier = pitch
+//        speechUtterance.volume = volume
+        
+        speechSynthesizer.speakUtterance(speechUtterance)
+    }
 
 }
 
