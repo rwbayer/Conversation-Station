@@ -14,6 +14,10 @@ class ViewController: UIViewController, SKTransactionDelegate
 {
 
     @IBOutlet weak var mainTextField: UITextField!
+    @IBOutlet weak var heardTextLabel: UILabel!
+    
+    
+    
     let speechSynthesizer = AVSpeechSynthesizer()
     
     
@@ -86,6 +90,19 @@ class ViewController: UIViewController, SKTransactionDelegate
                                              language: language,
                                              options: nil,
                                              delegate: self)
+    }
+    
+    func transaction(_ transaction: SKTransaction!, didReceive recognition: SKRecognition!)
+    {
+        //Take the best result
+        heardTextLabel.text! += recognition.text;
+        
+//        //Or iterate through the NBest list
+//        let nBest = recognition.details;
+//        for phrase in (nBest as! [SKRecognizedPhrase]!) {
+//            let text = phrase.text;
+//            let confidence = phrase.confidence;
+//        }
     }
     
 
