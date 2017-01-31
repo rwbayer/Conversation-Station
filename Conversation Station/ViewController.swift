@@ -14,8 +14,15 @@ class ViewController: UIViewController, SKTransactionDelegate
 {
 
     @IBOutlet weak var mainTextField: UITextField!
-    @IBOutlet weak var heardTextLabel: UILabel!
+    @IBOutlet weak var button0: UIButton!
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var button5: UIButton!
     
+    // list of presets
+    var currentPresets: [Preset] = [Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad")]
     
     
     let speechSynthesizer = AVSpeechSynthesizer()
@@ -44,7 +51,6 @@ class ViewController: UIViewController, SKTransactionDelegate
         super.viewDidLoad()
         
         // show the keyboard on launch
-        
         mainTextField.textInputView.becomeFirstResponder()
         super.viewDidLoad()
         
@@ -64,6 +70,9 @@ class ViewController: UIViewController, SKTransactionDelegate
             present(alertView, animated: true, completion: nil)
             return
         }
+        
+        // set up preset buttons
+        setUpPresets()
         
 //        loadEarcons()
     }
@@ -95,7 +104,7 @@ class ViewController: UIViewController, SKTransactionDelegate
     func transaction(_ transaction: SKTransaction!, didReceive recognition: SKRecognition!)
     {
         //Take the best result
-        heardTextLabel.text! += recognition.text;
+//        heardTextLabel.text! += recognition.text;
         
 //        //Or iterate through the NBest list
 //        let nBest = recognition.details;
@@ -105,6 +114,52 @@ class ViewController: UIViewController, SKTransactionDelegate
 //        }
     }
     
-
+    @IBAction func button0Pressed(_ sender: UIButton)
+    {
+        speakPreset(ind:0)
+    }
+    
+    @IBAction func button1Pressed(_ sender: UIButton)
+    {
+        speakPreset(ind:1)
+    }
+    
+    @IBAction func button2Pressed(_ sender: UIButton)
+    {
+        speakPreset(ind:2)
+    }
+    
+    @IBAction func button3Pressed(_ sender: UIButton)
+    {
+        speakPreset(ind:3)
+    }
+    
+    @IBAction func button4Pressed(_ sender: UIButton)
+    {
+        speakPreset(ind:4)
+    }
+    
+    @IBAction func button5Pressed(_ sender: UIButton)
+    {
+        speakPreset(ind:5)
+    }
+    
+    func speakPreset(ind : Int)
+    {
+        let stringToSpeak = currentPresets[ind].expression
+        
+        let speechUtterance = AVSpeechUtterance(string: stringToSpeak)
+        
+        speechSynthesizer.speak(speechUtterance)
+    }
+    
+    func setUpPresets()
+    {
+//        for p in currentPresets
+//        {
+           // todo
+//        }
+        
+    }
 }
 

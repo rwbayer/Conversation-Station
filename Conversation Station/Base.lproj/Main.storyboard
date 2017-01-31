@@ -59,6 +59,9 @@
                                     <constraint firstAttribute="height" constant="140" id="DGH-Mz-q8o"/>
                                 </constraints>
                                 <state key="normal" image="sad.jpg"/>
+                                <connections>
+                                    <action selector="button0Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CU4-ZB-qSE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZg-SG-fnh">
                                 <rect key="frame" x="182" y="136" width="142" height="140"/>
@@ -67,6 +70,9 @@
                                     <constraint firstAttribute="width" constant="142" id="pCg-rG-V8Y"/>
                                 </constraints>
                                 <state key="normal" image="sad.jpg"/>
+                                <connections>
+                                    <action selector="button1Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H3E-8h-CSx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkH-f9-bQL">
                                 <rect key="frame" x="332" y="136" width="142" height="140"/>
@@ -75,6 +81,9 @@
                                     <constraint firstAttribute="height" constant="140" id="VV8-CC-Wud"/>
                                 </constraints>
                                 <state key="normal" image="sad.jpg"/>
+                                <connections>
+                                    <action selector="button2Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="npC-Jb-DCk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jb-7C-KWm">
                                 <rect key="frame" x="499" y="136" width="142" height="140"/>
@@ -83,6 +92,9 @@
                                     <constraint firstAttribute="height" constant="140" id="mgS-wO-1yt"/>
                                 </constraints>
                                 <state key="normal" image="sad.jpg"/>
+                                <connections>
+                                    <action selector="button3Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nj9-pm-eRi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5Z-fl-zNt">
                                 <rect key="frame" x="649" y="136" width="142" height="140"/>
@@ -91,6 +103,9 @@
                                     <constraint firstAttribute="width" constant="142" id="foW-Ca-zH1"/>
                                 </constraints>
                                 <state key="normal" image="sad.jpg"/>
+                                <connections>
+                                    <action selector="button4Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="chV-EV-6An"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPc-ct-Za3">
                                 <rect key="frame" x="799" y="136" width="142" height="140"/>
@@ -99,6 +114,9 @@
                                     <constraint firstAttribute="height" constant="140" id="nOi-fb-Pka"/>
                                 </constraints>
                                 <state key="normal" image="sad.jpg"/>
+                                <connections>
+                                    <action selector="button5Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eja-Vt-xGY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -125,6 +143,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="button0" destination="pGu-5V-LwC" id="dTM-Ad-sc5"/>
+                        <outlet property="button1" destination="LZg-SG-fnh" id="bWb-Cl-wxU"/>
+                        <outlet property="button2" destination="tkH-f9-bQL" id="FqO-dE-9Gk"/>
+                        <outlet property="button3" destination="4jb-7C-KWm" id="Oup-R1-eph"/>
+                        <outlet property="button4" destination="m5Z-fl-zNt" id="MgK-ik-GIf"/>
+                        <outlet property="button5" destination="cPc-ct-Za3" id="lxW-W2-xRd"/>
                         <outlet property="mainTextField" destination="tgm-On-74O" id="y3h-d0-Wzo"/>
                     </connections>
                 </viewController>
