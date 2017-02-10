@@ -150,15 +150,64 @@
                         <outlet property="button4" destination="m5Z-fl-zNt" id="MgK-ik-GIf"/>
                         <outlet property="button5" destination="cPc-ct-Za3" id="lxW-W2-xRd"/>
                         <outlet property="mainTextField" destination="tgm-On-74O" id="y3h-d0-Wzo"/>
+                        <segue destination="Dxp-66-nHm" kind="presentation" identifier="listenSegue" id="6HF-HA-58B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="287.109375" y="294.53125"/>
         </scene>
+        <!--Recording View Controller-->
+        <scene sceneID="lCo-Ab-WtD">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="Dxp-66-nHm" customClass="RecordingViewController" customModule="Conversation_Station" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="maD-Aj-XtF"/>
+                        <viewControllerLayoutGuide type="bottom" id="T7P-Tu-hdc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lsw-Vw-o0V">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ov-Pc-1X3">
+                                <rect key="frame" x="955" y="28" width="50" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="CLOSE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="Dxp-66-nHm" eventType="touchUpInside" id="ia6-Sl-40y"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic.png" translatesAutoresizingMaskIntoConstraints="NO" id="bG7-9m-rdb">
+                                <rect key="frame" x="387" y="259" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="a0T-4H-TVU"/>
+                                    <constraint firstAttribute="width" constant="250" id="fOb-Ry-cM8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bG7-9m-rdb" firstAttribute="centerX" secondItem="lsw-Vw-o0V" secondAttribute="centerX" id="273-yX-A1d"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7ov-Pc-1X3" secondAttribute="trailing" constant="-1" id="Lep-DC-dhq"/>
+                            <constraint firstItem="bG7-9m-rdb" firstAttribute="centerY" secondItem="lsw-Vw-o0V" secondAttribute="centerY" id="kxQ-ly-Yj0"/>
+                            <constraint firstItem="7ov-Pc-1X3" firstAttribute="top" secondItem="maD-Aj-XtF" secondAttribute="bottom" constant="8" id="n7T-2X-m5K"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="5jy-p8-EeD" kind="unwind" identifier="backToMainScreen" unwindAction="unwindToMenuWithSegue:" id="DwT-xj-pad"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AtE-S1-mo6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5jy-p8-EeD" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1316" y="321"/>
+        </scene>
     </scenes>
     <resources>
         <image name="listen.png" width="235" height="224"/>
+        <image name="mic.png" width="500" height="500"/>
         <image name="sad.jpg" width="142" height="140"/>
         <image name="speak.png" width="263" height="239"/>
     </resources>

@@ -8,9 +8,9 @@
 
 import UIKit
 import AVFoundation
-import SpeechKit
+//import SpeechKit
 
-class ViewController: UIViewController, SKTransactionDelegate
+class ViewController: UIViewController
 {
 
     @IBOutlet weak var mainTextField: UITextField!
@@ -22,59 +22,29 @@ class ViewController: UIViewController, SKTransactionDelegate
     @IBOutlet weak var button5: UIButton!
     
     // list of presets
-    var currentPresets: [Preset] = [Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "sad.jpg")!, expression: "sad")]
+    var currentPresets: [Preset] = [Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "happy.jpg")!, expression: "happy"), Preset(image: UIImage(named: "angry.jpg")!, expression: "angry"), Preset(image: UIImage(named: "excited.jpg")!, expression: "excited"), Preset(image: UIImage(named: "proud.jpg")!, expression: "proud"), Preset(image: UIImage(named: "surprised.jpg")!, expression: "surprised")]
     
     
     let speechSynthesizer = AVSpeechSynthesizer()
     
-    
-    // State Logic: IDLE -> LISTENING -> PROCESSING -> repeat
-    enum SKSState
-    {
-        case idle
-        case listening
-        case processing
-    }
-    
-    // Settings
-    var language: String!
-    var recognitionType: String!
-    var progressiveResults: Bool!
-    var endpointer: SKTransactionEndOfSpeechDetection!
-    
-    var state = SKSState.idle
-    
-    var skSession:SKSession?
-    var skTransaction:SKTransaction?
+    var dataReceived: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // show the keyboard on launch
-        mainTextField.textInputView.becomeFirstResponder()
+        mainTextField.becomeFirstResponder()
         super.viewDidLoad()
-        
-        recognitionType = SKTransactionSpeechTypeDictation
-        endpointer = .short
-        language = LANGUAGE
-        state = .idle
-        skTransaction = nil
-        
-        // Create a session
-        skSession = SKSession(url: URL(string: SKServerUrl), appToken: SKAppKey)
-        
-        if (skSession == nil) {
-            let alertView = UIAlertController(title: "SpeechKit", message: "Failed to initialize SpeechKit session.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .default) { (action) in }
-            alertView.addAction(defaultAction)
-            present(alertView, animated: true, completion: nil)
-            return
-        }
         
         // set up preset buttons
         setUpPresets()
         
 //        loadEarcons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,24 +64,9 @@ class ViewController: UIViewController, SKTransactionDelegate
     
     @IBAction func listenButtonPressed(_ sender: UIButton)
     {
-        skTransaction = skSession!.recognize(withType: recognitionType,
-                                             detection: endpointer,
-                                             language: language,
-                                             options: nil,
-                                             delegate: self)
-    }
-    
-    func transaction(_ transaction: SKTransaction!, didReceive recognition: SKRecognition!)
-    {
-        //Take the best result
-//        heardTextLabel.text! += recognition.text;
-        
-//        //Or iterate through the NBest list
-//        let nBest = recognition.details;
-//        for phrase in (nBest as! [SKRecognizedPhrase]!) {
-//            let text = phrase.text;
-//            let confidence = phrase.confidence;
-//        }
+        mainTextField.resignFirstResponder()
+
+        performSegue(withIdentifier: "listenSegue", sender: nil)
     }
     
     @IBAction func button0Pressed(_ sender: UIButton)
@@ -155,11 +110,48 @@ class ViewController: UIViewController, SKTransactionDelegate
     
     func setUpPresets()
     {
-//        for p in currentPresets
-//        {
-           // todo
-//        }
+        for (index, element) in currentPresets.enumerated()
+        {
+            switch(index)
+            {
+            case 0:
+                button0.setImage(element.image, for: .normal)
+                button0.layer.borderWidth = 1
+                button0.layer.borderColor = UIColor.black.cgColor
+            case 1:
+                button1.setImage(element.image, for: .normal)
+                button1.layer.borderWidth = 1
+                button1.layer.borderColor = UIColor.black.cgColor
+            case 2:
+                button2.setImage(element.image, for: .normal)
+                button2.layer.borderWidth = 1
+                button2.layer.borderColor = UIColor.black.cgColor
+            case 3:
+                button3.setImage(element.image, for: .normal)
+                button3.layer.borderWidth = 1
+                button3.layer.borderColor = UIColor.black.cgColor
+            case 4:
+                button4.setImage(element.image, for: .normal)
+                button4.layer.borderWidth = 1
+                button4.layer.borderColor = UIColor.black.cgColor
+            case 5:
+                button5.setImage(element.image, for: .normal)
+                button5.layer.borderWidth = 1
+                button5.layer.borderColor = UIColor.black.cgColor
+            default: break
+            }
+        }
         
+    }
+    
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue)
+    {
+        if let sourceViewController = segue.source as? RecordingViewController
+        {
+            dataReceived = sourceViewController.dataPassed
+        }
+        
+        mainTextField.becomeFirstResponder()
     }
 }
 
