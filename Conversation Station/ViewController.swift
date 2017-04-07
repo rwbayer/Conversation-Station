@@ -22,7 +22,19 @@ class ViewController: UIViewController
     @IBOutlet weak var button5: UIButton!
     
     // list of presets
-    var currentPresets: [Preset] = [Preset(image: UIImage(named: "sad.jpg")!, expression: "sad"), Preset(image: UIImage(named: "happy.jpg")!, expression: "happy"), Preset(image: UIImage(named: "angry.jpg")!, expression: "angry"), Preset(image: UIImage(named: "excited.jpg")!, expression: "excited"), Preset(image: UIImage(named: "proud.jpg")!, expression: "proud"), Preset(image: UIImage(named: "surprised.jpg")!, expression: "surprised")]
+    var currentPresets: [Preset] = [Preset(image: UIImage(named: "yes.png")!, expression: "yes"), Preset(image: UIImage(named: "no.png")!, expression: "no"), Preset(image: UIImage(named: "hello.png")!, expression: "hello"), Preset(image: UIImage(named: "goodbye.png")!, expression: "goodbye"), Preset(image: UIImage(named: "Idonotknow.png")!, expression: "I do not know"), Preset(image: UIImage(named: "celebrate.png")!, expression: "celebrate")]
+    
+     var organizationPresets: [Preset] = [Preset(image: UIImage(named: "airport.png")!, expression: "airport"), Preset(image: UIImage(named: "business.png")!, expression: "business"), Preset(image: UIImage(named: "church.png")!, expression: "church"), Preset(image: UIImage(named: "circus.png")!, expression: "circus"), Preset(image: UIImage(named: "hospital.png")!, expression: "hospital"), Preset(image: UIImage(named: "government.png")!, expression: "government")]
+    
+     var locationPresets: [Preset] = [Preset(image: UIImage(named: "park.png")!, expression: "park"), Preset(image: UIImage(named: "office.png")!, expression: "office"), Preset(image: UIImage(named: "school.png")!, expression: "school"), Preset(image: UIImage(named: "theater.png")!, expression: "theater"), Preset(image: UIImage(named: "home.png")!, expression: "home"), Preset(image: UIImage(named: "beach.png")!, expression: "beach")]
+    
+    var personPresets: [Preset] = [Preset(image: UIImage(named: "mother.png")!, expression: "mother"), Preset(image: UIImage(named: "father.png")!, expression: "father"), Preset(image: UIImage(named: "brother.png")!, expression: "brother"), Preset(image: UIImage(named: "sister.png")!, expression: "sister"), Preset(image: UIImage(named: "musician.png")!, expression: "musician"), Preset(image: UIImage(named: "acrobat.png")!, expression: "acrobat")]
+    
+    var artPresets: [Preset] = [Preset(image: UIImage(named: "art.png")!, expression: "art"), Preset(image: UIImage(named: "musician.png")!, expression: "musician"), Preset(image: UIImage(named: "singer.png")!, expression: "singer"), Preset(image: UIImage(named: "book.png")!, expression: "book"), Preset(image: UIImage(named: "movie.png")!, expression: "movie"), Preset(image: UIImage(named: "painting.png")!, expression: "painting")]
+    
+    var consumerPresets: [Preset] = [Preset(image: UIImage(named: "ball.png")!, expression: "ball"), Preset(image: UIImage(named: "phone.png")!, expression: "phone"), Preset(image: UIImage(named: "car.png")!, expression: "car"), Preset(image: UIImage(named: "tabletComputer.png")!, expression: "tablet computer"), Preset(image: UIImage(named: "toy.png")!, expression: "toy"), Preset(image: UIImage(named: "videoGame.png")!, expression: "video game")]
+    
+    var eventPresets: [Preset] = [Preset(image: UIImage(named: "tvShow.png")!, expression: "television show"), Preset(image: UIImage(named: "accident.png")!, expression: "accident"), Preset(image: UIImage(named: "holiday.png")!, expression: "holiday"), Preset(image: UIImage(named: "nye.png")!, expression: "new year's eve"), Preset(image: UIImage(named: "sportingEvent.png")!, expression: "sporting event"), Preset(image: UIImage(named: "play.png")!, expression: "play")]
     
     
     let speechSynthesizer = AVSpeechSynthesizer()
@@ -101,7 +113,7 @@ class ViewController: UIViewController
     
     func speakPreset(ind : Int)
     {
-        let stringToSpeak = currentPresets[ind].expression
+        let stringToSpeak = eventPresets[ind].expression
         
         let speechUtterance = AVSpeechUtterance(string: stringToSpeak)
         
@@ -110,7 +122,7 @@ class ViewController: UIViewController
     
     func setUpPresets()
     {
-        for (index, element) in currentPresets.enumerated()
+        for (index, element) in eventPresets.enumerated()
         {
             switch(index)
             {
@@ -144,6 +156,38 @@ class ViewController: UIViewController
         
     }
     
+    func sendToServer(data: String)
+    {
+        // prepare json data
+        let json: [String: Any] = ["type": "PLAIN_TEXT",
+                                   "content": data]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "https://communicationstation-158117.appspot.com/upload_json")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                print("response: ",  responseJSON)
+            }
+        }
+        
+        task.resume()
+    }
+    
     @IBAction func unwindToMenu(segue: UIStoryboardSegue)
     {
         if let sourceViewController = segue.source as? RecordingViewController
@@ -152,6 +196,10 @@ class ViewController: UIViewController
         }
         
         mainTextField.becomeFirstResponder()
+        
+        print(dataReceived);
+        
+        sendToServer(data: dataReceived!);
     }
 }
 
