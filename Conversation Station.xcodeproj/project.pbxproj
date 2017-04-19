@@ -60,6 +60,12 @@
 		21D9F3871E4D986D0024A36D /* happy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 21D9F3821E4D986D0024A36D /* happy.jpg */; };
 		21D9F3881E4D986D0024A36D /* proud.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 21D9F3831E4D986D0024A36D /* proud.jpg */; };
 		21D9F3891E4D986D0024A36D /* surprised.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 21D9F3841E4D986D0024A36D /* surprised.jpg */; };
+		21DFF8961EA71CA800BC152E /* angry.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DFF8911EA71CA800BC152E /* angry.png */; };
+		21DFF8971EA71CA800BC152E /* confused.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DFF8921EA71CA800BC152E /* confused.png */; };
+		21DFF8981EA71CA800BC152E /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DFF8931EA71CA800BC152E /* sad.png */; };
+		21DFF8991EA71CA800BC152E /* surprised.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DFF8941EA71CA800BC152E /* surprised.png */; };
+		21DFF89A1EA71CA800BC152E /* tired.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DFF8951EA71CA800BC152E /* tired.png */; };
+		21DFF89C1EA71CF400BC152E /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DFF89B1EA71CF400BC152E /* happy.png */; };
 		21E275B81E35EC3D009420C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E275B71E35EC3D009420C2 /* AppDelegate.swift */; };
 		21E275BA1E35EC3D009420C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E275B91E35EC3D009420C2 /* ViewController.swift */; };
 		21E275BD1E35EC3D009420C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21E275BB1E35EC3D009420C2 /* Main.storyboard */; };
@@ -144,6 +150,12 @@
 		21D9F3821E4D986D0024A36D /* happy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = happy.jpg; sourceTree = "<group>"; };
 		21D9F3831E4D986D0024A36D /* proud.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = proud.jpg; sourceTree = "<group>"; };
 		21D9F3841E4D986D0024A36D /* surprised.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = surprised.jpg; sourceTree = "<group>"; };
+		21DFF8911EA71CA800BC152E /* angry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = angry.png; path = cards/feeling/angry.png; sourceTree = "<group>"; };
+		21DFF8921EA71CA800BC152E /* confused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = confused.png; path = cards/feeling/confused.png; sourceTree = "<group>"; };
+		21DFF8931EA71CA800BC152E /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sad.png; path = cards/feeling/sad.png; sourceTree = "<group>"; };
+		21DFF8941EA71CA800BC152E /* surprised.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = surprised.png; path = cards/feeling/surprised.png; sourceTree = "<group>"; };
+		21DFF8951EA71CA800BC152E /* tired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tired.png; path = cards/feeling/tired.png; sourceTree = "<group>"; };
+		21DFF89B1EA71CF400BC152E /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = happy.png; path = cards/feeling/happy.png; sourceTree = "<group>"; };
 		21E275B41E35EC3D009420C2 /* Conversation Station.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Conversation Station.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21E275B71E35EC3D009420C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21E275B91E35EC3D009420C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +301,12 @@
 		214176281E96F97400C04CB0 /* feeling */ = {
 			isa = PBXGroup;
 			children = (
+				21DFF8911EA71CA800BC152E /* angry.png */,
+				21DFF8921EA71CA800BC152E /* confused.png */,
+				21DFF89B1EA71CF400BC152E /* happy.png */,
+				21DFF8931EA71CA800BC152E /* sad.png */,
+				21DFF8941EA71CA800BC152E /* surprised.png */,
+				21DFF8951EA71CA800BC152E /* tired.png */,
 			);
 			name = feeling;
 			sourceTree = "<group>";
@@ -528,12 +546,15 @@
 				2141765A1E97058300C04CB0 /* hospital.png in Resources */,
 				21D9F3881E4D986D0024A36D /* proud.jpg in Resources */,
 				2141762E1E96F98600C04CB0 /* Idonotknow.png in Resources */,
+				21DFF8971EA71CA800BC152E /* confused.png in Resources */,
 				214176591E97058300C04CB0 /* government.png in Resources */,
 				21D9F3851E4D986D0024A36D /* angry.jpg in Resources */,
 				214176691E9706DD00C04CB0 /* brother.png in Resources */,
+				21DFF8991EA71CA800BC152E /* surprised.png in Resources */,
 				2141767A1E97082600C04CB0 /* book.png in Resources */,
 				214176321E96F99B00C04CB0 /* yes.png in Resources */,
 				214176841E9708D400C04CB0 /* videoGame.png in Resources */,
+				21DFF89A1EA71CA800BC152E /* tired.png in Resources */,
 				214176261E96F93800C04CB0 /* speak.png in Resources */,
 				21E275C21E35EC3D009420C2 /* LaunchScreen.storyboard in Resources */,
 				214176901E970A6D00C04CB0 /* accident.png in Resources */,
@@ -543,10 +564,12 @@
 				214176811E9708D400C04CB0 /* ball.png in Resources */,
 				214176581E97058300C04CB0 /* circus.png in Resources */,
 				2141768F1E970A6D00C04CB0 /* tvShow.png in Resources */,
+				21DFF89C1EA71CF400BC152E /* happy.png in Resources */,
 				214176621E9705D000C04CB0 /* office.png in Resources */,
 				214176641E9705DB00C04CB0 /* theater.png in Resources */,
 				214176311E96F99B00C04CB0 /* no.png in Resources */,
 				21678DC01E4544DE0043A170 /* mic.png in Resources */,
+				21DFF8981EA71CA800BC152E /* sad.png in Resources */,
 				214176871E9708FF00C04CB0 /* tabletComputer.png in Resources */,
 				2141762C1E96F98600C04CB0 /* goodbye.png in Resources */,
 				21D9F3861E4D986D0024A36D /* excited.jpg in Resources */,
@@ -561,6 +584,7 @@
 				2141765C1E97059D00C04CB0 /* park.png in Resources */,
 				214176941E970A6D00C04CB0 /* play.png in Resources */,
 				2141766B1E9706DD00C04CB0 /* mother.png in Resources */,
+				21DFF8961EA71CA800BC152E /* angry.png in Resources */,
 				214176881E9708FF00C04CB0 /* toy.png in Resources */,
 				214176561E97058300C04CB0 /* business.png in Resources */,
 				2141767B1E97082600C04CB0 /* movie.png in Resources */,

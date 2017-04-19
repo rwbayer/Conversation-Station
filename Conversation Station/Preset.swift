@@ -11,10 +11,10 @@ import UIKit
 
 class Preset
 {
-    var image: UIImage
+    var image: String
     var expression: String
     
-    init(image: UIImage, expression: String)
+    init(image: String, expression: String)
     {
         self.image = image
         self.expression = expression
