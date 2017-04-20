@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -58,7 +58,7 @@
                                     <constraint firstAttribute="width" constant="142" id="7ub-PB-BAd"/>
                                     <constraint firstAttribute="height" constant="140" id="DGH-Mz-q8o"/>
                                 </constraints>
-                                <state key="normal" image="sad.jpg"/>
+                                <state key="normal" image="yes.png"/>
                                 <connections>
                                     <action selector="button0Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CU4-ZB-qSE"/>
                                 </connections>
@@ -69,7 +69,7 @@
                                     <constraint firstAttribute="height" constant="140" id="RqU-L5-Nrj"/>
                                     <constraint firstAttribute="width" constant="142" id="pCg-rG-V8Y"/>
                                 </constraints>
-                                <state key="normal" image="sad.jpg"/>
+                                <state key="normal" image="no.png"/>
                                 <connections>
                                     <action selector="button1Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H3E-8h-CSx"/>
                                 </connections>
@@ -80,7 +80,7 @@
                                     <constraint firstAttribute="width" constant="142" id="1fG-MU-fr4"/>
                                     <constraint firstAttribute="height" constant="140" id="VV8-CC-Wud"/>
                                 </constraints>
-                                <state key="normal" image="sad.jpg"/>
+                                <state key="normal" image="hello.png"/>
                                 <connections>
                                     <action selector="button2Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="npC-Jb-DCk"/>
                                 </connections>
@@ -91,7 +91,7 @@
                                     <constraint firstAttribute="width" constant="142" id="Uq9-Yy-IIv"/>
                                     <constraint firstAttribute="height" constant="140" id="mgS-wO-1yt"/>
                                 </constraints>
-                                <state key="normal" image="sad.jpg"/>
+                                <state key="normal" image="goodbye.png"/>
                                 <connections>
                                     <action selector="button3Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nj9-pm-eRi"/>
                                 </connections>
@@ -102,7 +102,7 @@
                                     <constraint firstAttribute="height" constant="140" id="Xh9-qZ-HjA"/>
                                     <constraint firstAttribute="width" constant="142" id="foW-Ca-zH1"/>
                                 </constraints>
-                                <state key="normal" image="sad.jpg"/>
+                                <state key="normal" image="Idonotknow.png"/>
                                 <connections>
                                     <action selector="button4Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="chV-EV-6An"/>
                                 </connections>
@@ -113,7 +113,7 @@
                                     <constraint firstAttribute="width" constant="142" id="4BC-PK-itW"/>
                                     <constraint firstAttribute="height" constant="140" id="nOi-fb-Pka"/>
                                 </constraints>
-                                <state key="normal" image="sad.jpg"/>
+                                <state key="normal" image="celebrate.png"/>
                                 <connections>
                                     <action selector="button5Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eja-Vt-xGY"/>
                                 </connections>
@@ -206,9 +206,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="listen.png" width="235" height="224"/>
+        <image name="Idonotknow.png" width="500" height="500"/>
+        <image name="celebrate.png" width="500" height="500"/>
+        <image name="goodbye.png" width="500" height="500"/>
+        <image name="hello.png" width="500" height="500"/>
+        <image name="listen.png" width="500" height="500"/>
         <image name="mic.png" width="500" height="500"/>
-        <image name="sad.jpg" width="142" height="140"/>
-        <image name="speak.png" width="263" height="239"/>
+        <image name="no.png" width="500" height="500"/>
+        <image name="speak.png" width="500" height="500"/>
+        <image name="yes.png" width="500" height="500"/>
     </resources>
 </document>

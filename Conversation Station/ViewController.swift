@@ -476,7 +476,10 @@ class ViewController: UIViewController
         
         print(dataReceived);
         
-        sendToServer(data: dataReceived!);
+        if (dataReceived != nil)
+        {
+            sendToServer(data: dataReceived!);
+        }
     }
 }
 
