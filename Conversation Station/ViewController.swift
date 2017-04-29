@@ -176,7 +176,9 @@ class ViewController: UIViewController, SKTransactionDelegate
         
         let text = recognition.text
         
-        if (text?.contains("Bobby"))!
+        print(UserDefaults.standard.string(forKey: defaultsKeys.keyTwo))
+        
+        if (text?.contains(UserDefaults.standard.string(forKey: defaultsKeys.keyTwo)!))!
         {
             skTransaction!.stopRecording()
             skTransaction!.cancel()

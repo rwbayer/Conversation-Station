@@ -17,5 +17,19 @@ class SettingsViewController: UIViewController
         self.performSegue(withIdentifier: "backToMainScreenFromSettings", sender: self)
     }
     
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        saveSettings()
+    }
+    
+    func saveSettings()
+    {
+        let defaults = UserDefaults.standard
+        defaults.set("default", forKey: defaultsKeys.keyOne) // voice
+        defaults.set("Davis", forKey: defaultsKeys.keyTwo) // name
+        defaults.set("6", forKey: defaultsKeys.keyThree) // number of options
+    }
 }
     
