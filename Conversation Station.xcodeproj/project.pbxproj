@@ -52,6 +52,7 @@
 		214176941E970A6D00C04CB0 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 2141768E1E970A6D00C04CB0 /* play.png */; };
 		214EDFEE1EB52B4E00592D9E /* sk_start.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 214EDFEC1EB52B4E00592D9E /* sk_start.pcm */; };
 		214EDFEF1EB52B4E00592D9E /* sk_stop.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 214EDFED1EB52B4E00592D9E /* sk_stop.pcm */; };
+		214EDFF11EB52F3600592D9E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EDFF01EB52F3600592D9E /* SettingsViewController.swift */; };
 		21678DBC1E3F10780043A170 /* sad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 21678DBB1E3F10780043A170 /* sad.jpg */; };
 		21678DBE1E41507F0043A170 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21678DBD1E41507F0043A170 /* Preset.swift */; };
 		21678DC01E4544DE0043A170 /* mic.png in Resources */ = {isa = PBXBuildFile; fileRef = 21678DBF1E4544DE0043A170 /* mic.png */; };
@@ -144,6 +145,7 @@
 		2141768E1E970A6D00C04CB0 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = cards/event/play.png; sourceTree = "<group>"; };
 		214EDFEC1EB52B4E00592D9E /* sk_start.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = sk_start.pcm; sourceTree = "<group>"; };
 		214EDFED1EB52B4E00592D9E /* sk_stop.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = sk_stop.pcm; sourceTree = "<group>"; };
+		214EDFF01EB52F3600592D9E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		21678DBB1E3F10780043A170 /* sad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sad.jpg; sourceTree = "<group>"; };
 		21678DBD1E41507F0043A170 /* Preset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
 		21678DBF1E4544DE0043A170 /* mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic.png; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				21C85CB81E3B2156005FD2D8 /* SKConfiguration.swift */,
 				21E275BB1E35EC3D009420C2 /* Main.storyboard */,
 				21CB1E611E4A90B300ED805A /* RecordingViewController.swift */,
+				214EDFF01EB52F3600592D9E /* SettingsViewController.swift */,
 				21E275BE1E35EC3D009420C2 /* Assets.xcassets */,
 				21E275C01E35EC3D009420C2 /* LaunchScreen.storyboard */,
 				21E275C31E35EC3D009420C2 /* Info.plist */,
@@ -766,6 +769,7 @@
 				21E275BA1E35EC3D009420C2 /* ViewController.swift in Sources */,
 				21678DBE1E41507F0043A170 /* Preset.swift in Sources */,
 				21E275B81E35EC3D009420C2 /* AppDelegate.swift in Sources */,
+				214EDFF11EB52F3600592D9E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
