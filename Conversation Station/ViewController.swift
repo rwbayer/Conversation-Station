@@ -8,9 +8,9 @@
 
 import UIKit
 import AVFoundation
-//import SpeechKit
+import SpeechKit
 
-class ViewController: UIViewController
+class ViewController: UIViewController, SKTransactionDelegate
 {
 
     @IBOutlet weak var mainTextField: UITextField!
@@ -45,6 +45,25 @@ class ViewController: UIViewController
     var feelingPresets: [Preset] = [Preset(image: "happy.png", expression: "happy"), Preset(image: "confused.png", expression: "confused"), Preset(image: "angry.png", expression: "angry"), Preset(image: "sad.png", expression: "sad"), Preset(image: "surprised.png", expression: "surprised"), Preset(image: "tired.png", expression: "tired")]
 
     
+    // State Logic: IDLE -> LISTENING -> PROCESSING -> repeat
+    enum SKSState
+    {
+        case idle
+        case listening
+        case processing
+    }
+    // Settings
+    var language: String!
+    var recognitionType: String!
+    var progressiveResults: Bool!
+    var endpointer: SKTransactionEndOfSpeechDetection!
+    
+    var state = SKSState.idle
+    
+    var skSession:SKSession?
+    var skTransaction:SKTransaction?
+    
+    
     var selectedGroup = "DEFAULT"
     
     
@@ -65,7 +84,31 @@ class ViewController: UIViewController
         // set up preset buttons
         showDefaults()
         
-//        loadEarcons()
+        recognitionType = SKTransactionSpeechTypeDictation
+        endpointer = .long
+        language = LANGUAGE
+        state = .idle
+        skTransaction = nil
+        
+        // Create a session
+        skSession = SKSession(url: URL(string: SKServerUrl), appToken: SKAppKey)
+        
+        if (skSession == nil) {
+            let alertView = UIAlertController(title: "SpeechKit", message: "Failed to initialize SpeechKit session.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default) { (action) in }
+            alertView.addAction(defaultAction)
+            present(alertView, animated: true, completion: nil)
+            return
+        }
+    }
+    
+    func startRecording()
+    {
+        skTransaction = skSession!.recognize(withType: recognitionType,
+                                             detection: endpointer,
+                                             language: language,
+                                             options: nil,
+                                             delegate: self)
     }
     
     deinit
@@ -86,12 +129,68 @@ class ViewController: UIViewController
     
     override func viewWillAppear(_ animated: Bool)
     {
-        
+        startRecording()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+    func transactionDidBeginRecording(_ transaction: SKTransaction!)
+    {
+        NSLog("did finish recording")
+    }
+    
+    func transactionDidFinishRecording(_ transaction: SKTransaction!)
+    {
+        NSLog("did finish recording")
+    }
+    
+    func transaction(_ transaction: SKTransaction!, didReceive recognition: SKRecognition!)
+    {
+        NSLog("did receive recognition: %@", recognition)
+        
+        // Take the best result
+        NSLog("%@", recognition.text)
+        
+        let text = recognition.text
+        
+        if (text?.contains("Bobby"))!
+        {
+            performSegue(withIdentifier: "listenSegue", sender: nil)
+        }
+        else
+        {
+            startRecording()
+        }
+        
+        //        //Or iterate through the NBest list
+        //        let nBest = recognition.details;
+        //        for phrase in (nBest as! [SKRecognizedPhrase]!) {
+        //            let text = phrase.text;
+        //            let confidence = phrase.confidence;
+        //        }
+    }
+    
+    func transaction(_ transaction: SKTransaction!, didReceiveServiceResponse response: [AnyHashable : Any]!)
+    {
+        NSLog("did receive service response: %@", response)
+    }
+    
+//    func transaction(_ transaction: SKTransaction!, didFinishWithSuggestion suggestion: String!)
+//    {
+//        NSLog("did finish with suggestion: %@", suggestion)
+//    }
+    
+    func transaction(_ transaction: SKTransaction!, didFailWithError error: Error!, suggestion: String!)
+    {
+        print("did fail with error:")
+        debugPrint(error)
+        
+        // start recording
+        startRecording()
+    }
+
 
     @IBAction func speakButtonPressed(_ sender: UIButton) {
         let speechUtterance = AVSpeechUtterance(string: mainTextField.text!)
