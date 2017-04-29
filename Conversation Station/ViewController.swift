@@ -176,6 +176,7 @@ class ViewController: UIViewController
                     {
                         print("Why is my image nil?")
                     }
+                    self.button0.setTitle(element.expression, for: UIControlState.normal)
                     self.button0.layer.borderWidth = 1
                     self.button0.layer.borderColor = UIColor.black.cgColor
                     self.button0.setNeedsDisplay()
@@ -192,6 +193,7 @@ class ViewController: UIViewController
                     {
                         print("Why is my image nil?")
                     }
+                    self.button1.setTitle(element.expression, for: UIControlState.normal)
                     self.button1.layer.borderWidth = 1
                     self.button1.layer.borderColor = UIColor.black.cgColor
                     self.button1.setNeedsDisplay()
@@ -208,6 +210,7 @@ class ViewController: UIViewController
                     {
                         print("Why is my image nil?")
                     }
+                    self.button2.setTitle(element.expression, for: UIControlState.normal)
                     self.button2.layer.borderWidth = 1
                     self.button2.layer.borderColor = UIColor.black.cgColor
                     self.button2.setNeedsDisplay()
@@ -224,6 +227,7 @@ class ViewController: UIViewController
                     {
                         print("Why is my image nil?")
                     }
+                    self.button3.setTitle(element.expression, for: UIControlState.normal)
                     self.button3.layer.borderWidth = 1
                     self.button3.layer.borderColor = UIColor.black.cgColor
                     self.button3.setNeedsDisplay()
@@ -240,6 +244,7 @@ class ViewController: UIViewController
                     {
                         print("Why is my image nil?")
                     }
+                    self.button4.setTitle(element.expression, for: UIControlState.normal)
                     self.button4.layer.borderWidth = 1
                     self.button4.layer.borderColor = UIColor.black.cgColor
                     self.button4.setNeedsDisplay()
@@ -256,6 +261,7 @@ class ViewController: UIViewController
                     {
                         print("Why is my image nil?")
                     }
+                    self.button5.setTitle(element.expression, for: UIControlState.normal)
                     self.button5.layer.borderWidth = 1
                     self.button5.layer.borderColor = UIColor.black.cgColor
                     self.button5.setNeedsDisplay()
