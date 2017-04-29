@@ -73,6 +73,20 @@ class RecordingViewController: UIViewController, SKTransactionDelegate
             return
         }
         
+        let audioFormat = SKPCMFormat()
+        audioFormat.sampleFormat = .signedLinear16
+        audioFormat.sampleRate = 16000;
+        audioFormat.channels = 1;
+        
+        let startEarconPath = Bundle.main.path(forResource: "sk_start", ofType: "pcm")
+        let stopEarconPath = Bundle.main.path(forResource: "sk_stop", ofType: "pcm")
+            
+        // Attach them to the session
+        skSession?.startEarcon = SKAudioFile(url: NSURL(fileURLWithPath: startEarconPath!) as URL!, pcmFormat: audioFormat)
+        skSession?.endEarcon = SKAudioFile(url: NSURL(fileURLWithPath: stopEarconPath!) as URL!, pcmFormat: audioFormat)
+//        session.errorEarcon = SKAudioFile(URL: NSURL(fileURLWithPath: errorEarconPath!), pcmFormat: audioFormat)
+//        session.cancelEarcon = SKAudioFile(URL: NSURL(fileURLWithPath: cancelEarconPath!), pcmFormat: audioFormat)
+        
         skTransaction = skSession!.recognize(withType: recognitionType,
                                             detection: endpointer,
                                             language: language,
