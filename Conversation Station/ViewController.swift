@@ -21,6 +21,11 @@ class ViewController: UIViewController
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var button5: UIButton!
     
+    
+    
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    
     // list of presets
     
     var initialPresets: [Preset] = [Preset(image: "yes.png", expression: "yes"), Preset(image: "no.png", expression: "no"), Preset(image: "hello.png", expression: "hello"), Preset(image: "goodbye.png", expression: "goodbye"), Preset(image: "Idonotknow.png", expression: "I do not know"), Preset(image: "celebrate.png", expression: "celebrate")]
@@ -52,12 +57,31 @@ class ViewController: UIViewController
         
         // show the keyboard on launch
         mainTextField.becomeFirstResponder()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+
         super.viewDidLoad()
         
         // set up preset buttons
         showDefaults()
         
 //        loadEarcons()
+    }
+    
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func keyboardNotification(notification: NSNotification)
+    {
+        if let userInfo = notification.userInfo
+        {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+
+            self.bottomConstraint?.constant = endFrame?.size.height ?? 0.0
+            self.view.layoutIfNeeded()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
