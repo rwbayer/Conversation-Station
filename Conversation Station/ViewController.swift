@@ -465,6 +465,7 @@ class ViewController: UIViewController
         }
     }
 
+    @available(iOS 10.0, *)
     @IBAction func unwindToMenu(segue: UIStoryboardSegue)
     {
         if let sourceViewController = segue.source as? RecordingViewController

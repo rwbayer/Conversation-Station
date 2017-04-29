@@ -7,31 +7,24 @@
 //
 
 import UIKit
-import SpeechKit
+import Speech
 
-class RecordingViewController: UIViewController, SKTransactionDelegate
+@available(iOS 10.0, *)
+class RecordingViewController: UIViewController, SFSpeechRecognizerDelegate
 {
-    // State Logic: IDLE -> LISTENING -> PROCESSING -> repeat
-    enum SKSState
-    {
-        case idle
-        case listening
-        case processing
-    }
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     
-    // Settings
-    var language: String!
-    var recognitionType: String!
-    var progressiveResults: Bool!
-    var endpointer: SKTransactionEndOfSpeechDetection!
-    
-    var state = SKSState.idle
-    
-    var skSession:SKSession?
-    var skTransaction:SKTransaction?
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
     
     var dataPassed : String?
 
+    @IBAction func closeButtonPressed(_ sender: UIButton)
+    {
+        self.performSegue(withIdentifier: "backToMainScreen", sender: self)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -56,57 +49,139 @@ class RecordingViewController: UIViewController, SKTransactionDelegate
             self.view.backgroundColor = UIColor.black
         }
         
-        recognitionType = SKTransactionSpeechTypeDictation
-        endpointer = .short
-        language = LANGUAGE
-        state = .idle
-        skTransaction = nil
         
-        // Create a session
-        skSession = SKSession(url: URL(string: SKServerUrl), appToken: SKAppKey)
+        speechRecognizer?.delegate = self  //3
         
-        if (skSession == nil) {
-            let alertView = UIAlertController(title: "SpeechKit", message: "Failed to initialize SpeechKit session.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .default) { (action) in }
-            alertView.addAction(defaultAction)
-            present(alertView, animated: true, completion: nil)
-            return
+        SFSpeechRecognizer.requestAuthorization { (authStatus) in  //4
+            
+            var isButtonEnabled = false
+            
+            switch authStatus {  //5
+            case .authorized:
+                isButtonEnabled = true
+                
+            case .denied:
+                isButtonEnabled = false
+                print("User denied access to speech recognition")
+                
+            case .restricted:
+                isButtonEnabled = false
+                print("Speech recognition restricted on this device")
+                
+            case .notDetermined:
+                isButtonEnabled = false
+                print("Speech recognition not yet authorized")
+            }
+            
+            OperationQueue.main.addOperation() {
+//                self.microphoneButton.isEnabled = isButtonEnabled
+            }
+        
+        }
+    }
+    
+    func startRecording()
+    {
+        
+        if recognitionTask != nil
+        {
+            recognitionTask?.cancel()
+            recognitionTask = nil
         }
         
-        skTransaction = skSession!.recognize(withType: recognitionType,
-                                            detection: endpointer,
-                                            language: language,
-                                            options: nil,
-                                            delegate: self)
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do
+        {
+            try audioSession.setCategory(AVAudioSessionCategoryRecord)
+            try audioSession.setMode(AVAudioSessionModeMeasurement)
+            try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        }
+        catch
+        {
+            print("audioSession properties weren't set because of an error.")
+        }
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
+        guard let inputNode = audioEngine.inputNode else {
+            fatalError("Audio engine has no input node")
+        }
+        
+        guard let recognitionRequest = recognitionRequest else {
+            fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
+        }
+        
+        recognitionRequest.shouldReportPartialResults = true
+        
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
+            
+            var isFinal = false
+            
+            if result != nil
+            {
+                
+//                self.textView.text = result?.bestTranscription.formattedString
+                isFinal = (result?.isFinal)!
+            }
+            
+            if error != nil || isFinal
+            {
+                self.audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                
+                self.recognitionRequest = nil
+                self.recognitionTask = nil
+                
+//                self.microphoneButton.isEnabled = true
+            }
+        })
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
+            self.recognitionRequest?.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        
+        do
+        {
+            try audioEngine.start()
+        }
+        catch
+        {
+            print("audioEngine couldn't start because of an error.")
+        }
+        
         
     }
     
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
+//    func didReceiveMemoryWarning()
+//    {
+//        super.didReceiveMemoryWarning()
+//    }
     
-    func transaction(_ transaction: SKTransaction!, didReceive recognition: SKRecognition!)
-    {
-        // Take the best result
-        NSLog("%@", recognition.text)
-        
-        dataPassed = recognition.text
-        
-        self.performSegue(withIdentifier: "backToMainScreen", sender: self)
-        
-        //        //Or iterate through the NBest list
-        //        let nBest = recognition.details;
-        //        for phrase in (nBest as! [SKRecognizedPhrase]!) {
-        //            let text = phrase.text;
-        //            let confidence = phrase.confidence;
-        //        }
-    }
-    
-    @IBAction func closeButtonPressed(_ sender: UIButton)
-    {
-        skTransaction!.stopRecording()
-        self.performSegue(withIdentifier: "backToMainScreen", sender: self)
-    }
+//    func transaction(_ transaction: SKTransaction!, didReceive recognition: SKRecognition!)
+//    {
+//        // Take the best result
+//        NSLog("%@", recognition.text)
+//        
+//        dataPassed = recognition.text
+//        
+//        self.performSegue(withIdentifier: "backToMainScreen", sender: self)
+//        
+//        //        //Or iterate through the NBest list
+//        //        let nBest = recognition.details;
+//        //        for phrase in (nBest as! [SKRecognizedPhrase]!) {
+//        //            let text = phrase.text;
+//        //            let confidence = phrase.confidence;
+//        //        }
+//    }
+//    
+//    @IBAction func closeButtonPressed(_ sender: UIButton)
+//    {
+////        skTransaction!.stopRecording()
+//        self.performSegue(withIdentifier: "backToMainScreen", sender: self)
+//    }
     
 }
