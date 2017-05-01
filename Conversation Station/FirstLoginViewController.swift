@@ -21,6 +21,7 @@ class FirstLoginViewController: UIViewController
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem)
     {
+        UserDefaults.standard.set(true, forKey: defaultsKeys.keyZero)
         self.performSegue(withIdentifier: "loginSuccess", sender: self)
     }
     
