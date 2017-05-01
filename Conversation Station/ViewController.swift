@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import SpeechKit
 
-class ViewController: UIViewController, SKTransactionDelegate
+class ViewController: UIViewController, SKTransactionDelegate, SKAudioPlayerDelegate
 {
 
     @IBOutlet weak var mainTextField: UITextField!
@@ -63,6 +63,7 @@ class ViewController: UIViewController, SKTransactionDelegate
     
     var skSession:SKSession?
     var skTransaction:SKTransaction?
+//    var speechTransaction:SKTransaction?
     
     
     var selectedGroup = "DEFAULT"
@@ -93,6 +94,7 @@ class ViewController: UIViewController, SKTransactionDelegate
         language = LANGUAGE
         state = .idle
         skTransaction = nil
+//        speechTransaction = nil
         
         // Create a session
         skSession = SKSession(url: URL(string: SKServerUrl), appToken: SKAppKey)
@@ -307,11 +309,28 @@ class ViewController: UIViewController, SKTransactionDelegate
         let speechUtterance = AVSpeechUtterance(string: textToSpeak)
         speechSynthesizer.speak(speechUtterance)
 
+//        if(speechTransaction == nil) {
+//            speechTransaction = skSession!.speak(textToSpeak,
+//                                             withLanguage: "eng-USA",
+//                                             options: nil,
+//                                             delegate: self)
+//            speechTransaction = skSession!.speak(textToSpeak, withVoice: "Samantha", options: nil, delegate: self)
+//        } else {
+//            speechTransaction!.cancel()
+//            resetTransaction()
+//        }
 //        let transaction = skSession.speakString(textToSpeak, withVoice: "Samantha", delegate: self)
 //        let transaction = skSession?.speak(textToSpeak, withVoice: "Samantha", options: nil, delegate: self)
 //        let options = [SKOptionsAutoPlayTTSKey: false]
 //
 //        let transaction = skSession!.speak(textToSpeak, withLanguage: "eng-USA", options: options, delegate: self)
+//    }
+    
+//    func resetTransaction()
+//    {
+//        OperationQueue.main.addOperation({
+//            self.speechTransaction = nil
+//         })
     }
     
     // SKTransactionDelegate
@@ -322,7 +341,7 @@ class ViewController: UIViewController, SKTransactionDelegate
     func transaction(_ transaction: SKTransaction!, didReceive audio: SKAudio!)
     {
         print("did receive audio")
-        skSession?.audioPlayer.play(audio)
+//        skSession?.audioPlayer.play(audio)
     }
     
     func changePredictedElements(elements: [Preset])
