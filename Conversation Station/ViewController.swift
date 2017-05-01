@@ -221,15 +221,9 @@ class ViewController: UIViewController, SKTransactionDelegate
     }
 
 
-    @IBAction func speakButtonPressed(_ sender: UIButton) {
-        let speechUtterance = AVSpeechUtterance(string: mainTextField.text!)
-        
-        // Can control rate, pitch and volume if necessary. maybe a settings page?
-//        speechUtterance.rate = rate
-//        speechUtterance.pitchMultiplier = pitch
-//        speechUtterance.volume = volume
-        
-        speechSynthesizer.speak(speechUtterance)
+    @IBAction func speakButtonPressed(_ sender: UIButton)
+    {
+        speak(mainTextField.text!)
     }
     
     @IBAction func listenButtonPressed(_ sender: UIButton)
@@ -305,9 +299,30 @@ class ViewController: UIViewController, SKTransactionDelegate
             break
         }
         
-        let speechUtterance = AVSpeechUtterance(string: stringToSpeak)
-        
+        speak(stringToSpeak)
+    }
+    
+    func speak(_ textToSpeak:String)
+    {
+        let speechUtterance = AVSpeechUtterance(string: textToSpeak)
         speechSynthesizer.speak(speechUtterance)
+
+//        let transaction = skSession.speakString(textToSpeak, withVoice: "Samantha", delegate: self)
+//        let transaction = skSession?.speak(textToSpeak, withVoice: "Samantha", options: nil, delegate: self)
+//        let options = [SKOptionsAutoPlayTTSKey: false]
+//
+//        let transaction = skSession!.speak(textToSpeak, withLanguage: "eng-USA", options: options, delegate: self)
+    }
+    
+    // SKTransactionDelegate
+//    func transaction(transaction: SKTransaction!, didReceiveAudio audio: SKAudio!) { ... }
+//    func transaction(transaction: SKTransaction!, didFinishWithSuggestion suggestion: String!) { ... }
+//    func transaction(transaction: SKTransaction!, didFailWithError error: NSError!, suggestion: String!) { ... }
+    
+    func transaction(_ transaction: SKTransaction!, didReceive audio: SKAudio!)
+    {
+        print("did receive audio")
+        skSession?.audioPlayer.play(audio)
     }
     
     func changePredictedElements(elements: [Preset])
