@@ -20,6 +20,7 @@ class ViewController: UIViewController, SKTransactionDelegate
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var button5: UIButton!
+    @IBOutlet weak var speakButton: UIButton!
     
     
     
@@ -71,8 +72,11 @@ class ViewController: UIViewController, SKTransactionDelegate
     
     var dataReceived: String?
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
         
         // show the keyboard on launch
         mainTextField.becomeFirstResponder()
@@ -100,10 +104,28 @@ class ViewController: UIViewController, SKTransactionDelegate
             present(alertView, animated: true, completion: nil)
             return
         }
+        
+        speakButton.addTarget(self, action: #selector(taps(_:event:)), for: UIControlEvents.touchDownRepeat)
+
+        startRecording()
+    }
+    
+    func taps(_ sender: UIButton, event: UIEvent)
+    {
+        let t: UITouch = event.allTouches!.first!
+        if (t.tapCount == 3)
+        {
+            skTransaction!.stopRecording()
+            skTransaction!.cancel()
+            performSegue(withIdentifier: "settingsSegue", sender: nil)
+        }
     }
     
     func startRecording()
     {
+        print("In start recording")
+        // if there's an existing, cancel
+        skTransaction?.cancel()
         skTransaction = skSession!.recognize(withType: recognitionType,
                                              detection: endpointer,
                                              language: language,
@@ -129,7 +151,8 @@ class ViewController: UIViewController, SKTransactionDelegate
     
     override func viewWillAppear(_ animated: Bool)
     {
-        startRecording()
+//        print("view will appear")
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -155,8 +178,12 @@ class ViewController: UIViewController, SKTransactionDelegate
         
         let text = recognition.text
         
-        if (text?.contains("Bobby"))!
+        print("lookin for: " + UserDefaults.standard.string(forKey: defaultsKeys.keyTwo)!)
+        
+        if (text?.contains(UserDefaults.standard.string(forKey: defaultsKeys.keyTwo)!))!
         {
+            skTransaction!.stopRecording()
+            skTransaction!.cancel()
             performSegue(withIdentifier: "listenSegue", sender: nil)
         }
         else
@@ -171,6 +198,8 @@ class ViewController: UIViewController, SKTransactionDelegate
         //            let confidence = phrase.confidence;
         //        }
     }
+    
+    //settingsSegue
     
     func transaction(_ transaction: SKTransaction!, didReceiveServiceResponse response: [AnyHashable : Any]!)
     {
@@ -206,7 +235,8 @@ class ViewController: UIViewController, SKTransactionDelegate
     @IBAction func listenButtonPressed(_ sender: UIButton)
     {
         mainTextField.resignFirstResponder()
-
+        skTransaction!.stopRecording()
+        skTransaction!.cancel()
         performSegue(withIdentifier: "listenSegue", sender: nil)
     }
     
@@ -525,39 +555,42 @@ class ViewController: UIViewController, SKTransactionDelegate
         else
         {
             let entities = responseJSON["entities"] as? [[String: Any]]
-            for entity in entities!
+            if (entities != nil)
             {
-                print("___________________________________");
-                let type = entity["type"] as! String
-                
-                switch (type)
+                for entity in entities!
                 {
-                case "LOCATION":
-                    location += 1
-                    break
-                case "WORK_OF_ART":
-                    work_of_art += 1
-                    break
-                case "PERSON":
-                    person += 1
-                    break
-                case "ORGANIZATION":
-                    organization += 1
-                    break
-                case "EVENT":
-                    event += 1
-                    break
-                case "CONSUMER_GOOD":
-                    consumer_good += 1
-                    break
-                default:
-                    break
+                    print("___________________________________");
+                    let type = entity["type"] as! String
+                    
+                    switch (type)
+                    {
+                    case "LOCATION":
+                        location += 1
+                        break
+                    case "WORK_OF_ART":
+                        work_of_art += 1
+                        break
+                    case "PERSON":
+                        person += 1
+                        break
+                    case "ORGANIZATION":
+                        organization += 1
+                        break
+                    case "EVENT":
+                        event += 1
+                        break
+                    case "CONSUMER_GOOD":
+                        consumer_good += 1
+                        break
+                    default:
+                        break
+                    }
+                    print(type)
+                    print("___________________________________");
+
                 }
-                print(type)
-                print("___________________________________");
-
             }
-
+            
             let maximum = max(consumer_good, event, organization, person, work_of_art, location)
             
             if (maximum != 0)
@@ -592,22 +625,33 @@ class ViewController: UIViewController, SKTransactionDelegate
                 showDefaults()
             }
         }
+        startRecording()
     }
 
     @IBAction func unwindToMenu(segue: UIStoryboardSegue)
     {
-        if let sourceViewController = segue.source as? RecordingViewController
+        print("In here")
+
+        if segue.source is RecordingViewController
         {
-            dataReceived = sourceViewController.dataPassed
+            let sourceViewController = segue.source as? RecordingViewController
+        
+            dataReceived = sourceViewController?.dataPassed
+            print(dataReceived);
+            
+            if (dataReceived != nil)
+            {
+                sendToServer(data: dataReceived!);
+            }
+            mainTextField.becomeFirstResponder()
+
+
         }
-        
-        mainTextField.becomeFirstResponder()
-        
-        print(dataReceived);
-        
-        if (dataReceived != nil)
+        else if segue.source is SettingsViewController
         {
-            sendToServer(data: dataReceived!);
+            DispatchQueue.main.async(){
+                self.mainTextField.becomeFirstResponder()
+            }
         }
     }
 }

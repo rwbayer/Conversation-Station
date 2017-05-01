@@ -84,15 +84,12 @@ class RecordingViewController: UIViewController, SKTransactionDelegate
         // Attach them to the session
         skSession?.startEarcon = SKAudioFile(url: NSURL(fileURLWithPath: startEarconPath!) as URL!, pcmFormat: audioFormat)
         skSession?.endEarcon = SKAudioFile(url: NSURL(fileURLWithPath: stopEarconPath!) as URL!, pcmFormat: audioFormat)
-//        session.errorEarcon = SKAudioFile(URL: NSURL(fileURLWithPath: errorEarconPath!), pcmFormat: audioFormat)
-//        session.cancelEarcon = SKAudioFile(URL: NSURL(fileURLWithPath: cancelEarconPath!), pcmFormat: audioFormat)
         
         skTransaction = skSession!.recognize(withType: recognitionType,
                                             detection: endpointer,
                                             language: language,
                                             options: nil,
                                             delegate: self)
-        
     }
     
     override func didReceiveMemoryWarning()
