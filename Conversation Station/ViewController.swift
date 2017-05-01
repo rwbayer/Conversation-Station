@@ -76,6 +76,8 @@ class ViewController: UIViewController, SKTransactionDelegate
     {
         super.viewDidLoad()
         
+        self.navigationController?.isNavigationBarHidden = true
+        
         // show the keyboard on launch
         mainTextField.becomeFirstResponder()
         
@@ -176,7 +178,7 @@ class ViewController: UIViewController, SKTransactionDelegate
         
         let text = recognition.text
         
-        print(UserDefaults.standard.string(forKey: defaultsKeys.keyTwo))
+        print("lookin for: " + UserDefaults.standard.string(forKey: defaultsKeys.keyTwo)!)
         
         if (text?.contains(UserDefaults.standard.string(forKey: defaultsKeys.keyTwo)!))!
         {

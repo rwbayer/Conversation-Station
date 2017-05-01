@@ -11,25 +11,25 @@ import UIKit
 class SettingsViewController: UIViewController
 {
     
-    
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem)
     {
         self.performSegue(withIdentifier: "backToMainScreenFromSettings", sender: self)
     }
     
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        saveSettings()
+//        saveSettings()
     }
     
-    func saveSettings()
-    {
-        let defaults = UserDefaults.standard
-        defaults.set("default", forKey: defaultsKeys.keyOne) // voice
-        defaults.set("Davis", forKey: defaultsKeys.keyTwo) // name
-        defaults.set("6", forKey: defaultsKeys.keyThree) // number of options
-    }
+//    func saveSettings()
+//    {
+////        let defaults = UserDefaults.standard
+////        defaults.set("default", forKey: defaultsKeys.keyOne) // voice
+////        defaults.set("Davis", forKey: defaultsKeys.keyTwo) // name
+////        defaults.set("6", forKey: defaultsKeys.keyThree) // number of options
+//    }
 }
     
