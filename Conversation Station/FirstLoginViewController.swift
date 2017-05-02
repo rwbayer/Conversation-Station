@@ -15,7 +15,7 @@ class FirstLoginViewController: UIViewController
         super.viewDidLoad()
         // set defaults
         UserDefaults.standard.set("Alice", forKey: defaultsKeys.keyOne) // voice
-        UserDefaults.standard.set("", forKey: defaultsKeys.keyThree) // name
+        UserDefaults.standard.set("", forKey: defaultsKeys.keyTwo) // name
         UserDefaults.standard.set(6, forKey: defaultsKeys.keyThree) // number of options
     }
     

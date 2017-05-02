@@ -55,6 +55,7 @@
 		214EDFF11EB52F3600592D9E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EDFF01EB52F3600592D9E /* SettingsViewController.swift */; };
 		214EDFF31EB5484200592D9E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EDFF21EB5484200592D9E /* Settings.swift */; };
 		214EDFF51EB54BD300592D9E /* FirstLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EDFF41EB54BD300592D9E /* FirstLoginViewController.swift */; };
+		214F54291EB83A1400A69CAD /* launch_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 214F54281EB83A1400A69CAD /* launch_image.png */; };
 		21678DBC1E3F10780043A170 /* sad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 21678DBB1E3F10780043A170 /* sad.jpg */; };
 		21678DBE1E41507F0043A170 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21678DBD1E41507F0043A170 /* Preset.swift */; };
 		21678DC01E4544DE0043A170 /* mic.png in Resources */ = {isa = PBXBuildFile; fileRef = 21678DBF1E4544DE0043A170 /* mic.png */; };
@@ -153,6 +154,7 @@
 		214EDFF01EB52F3600592D9E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		214EDFF21EB5484200592D9E /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		214EDFF41EB54BD300592D9E /* FirstLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLoginViewController.swift; sourceTree = "<group>"; };
+		214F54281EB83A1400A69CAD /* launch_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch_image.png; path = cards/icons/Assets/launch_image.png; sourceTree = "<group>"; };
 		21678DBB1E3F10780043A170 /* sad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sad.jpg; sourceTree = "<group>"; };
 		21678DBD1E41507F0043A170 /* Preset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
 		21678DBF1E4544DE0043A170 /* mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic.png; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				21678DBB1E3F10780043A170 /* sad.jpg */,
 				21D9F3801E4D986D0024A36D /* angry.jpg */,
 				214176231E96F92700C04CB0 /* listen.png */,
+				214F54281EB83A1400A69CAD /* launch_image.png */,
 				21D9F3811E4D986D0024A36D /* excited.jpg */,
 				21D9F3821E4D986D0024A36D /* happy.jpg */,
 				21D9F3831E4D986D0024A36D /* proud.jpg */,
@@ -604,6 +607,7 @@
 				2141764E1E97055500C04CB0 /* beach.png in Resources */,
 				214176571E97058300C04CB0 /* church.png in Resources */,
 				214176831E9708D400C04CB0 /* phone.png in Resources */,
+				214F54291EB83A1400A69CAD /* launch_image.png in Resources */,
 				2141762D1E96F98600C04CB0 /* hello.png in Resources */,
 				214176721E9707BD00C04CB0 /* acrobat.png in Resources */,
 				2141765C1E97059D00C04CB0 /* park.png in Resources */,

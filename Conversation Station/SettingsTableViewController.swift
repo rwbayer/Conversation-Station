@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SettingsTableViewController: UITableViewController
+class SettingsTableViewController: UITableViewController, UITextFieldDelegate
 {
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -45,6 +45,7 @@ class SettingsTableViewController: UITableViewController
         
         tap.cancelsTouchesInView = false
         self.tableView.addGestureRecognizer(tap)
+        self.nameTextField.delegate = self
     }
     
     func dismissKeyboard()
@@ -53,12 +54,12 @@ class SettingsTableViewController: UITableViewController
         UserDefaults.standard.set(nameTextField.text, forKey: defaultsKeys.keyTwo) // name
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-        nameTextField.resignFirstResponder()
+        dismissKeyboard()
         return true
     }
-    
+  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         if indexPath.section == 0
@@ -87,11 +88,13 @@ class SettingsTableViewController: UITableViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.identifier == "SavePlayerDetail"
-        {
-//            player = Player(name: nameTextField.text, game:game, rating: 1)
-        }
-        else if segue.identifier == "pickVoice"
+        UserDefaults.standard.set(nameTextField.text, forKey: defaultsKeys.keyTwo) // name
+
+//        if segue.identifier == "SavePlayerDetail"
+//        {
+////            player = Player(name: nameTextField.text, game:game, rating: 1)
+//        }
+        if segue.identifier == "pickVoice"
         {
             if let voicePickerViewController = segue.destination as? VoicePickerTableViewController
             {

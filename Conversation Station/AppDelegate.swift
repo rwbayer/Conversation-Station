@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(!UserDefaults.standard.bool(forKey: defaultsKeys.keyZero))
         {
             UserDefaults.standard.set(false, forKey: defaultsKeys.keyZero)
+            UserDefaults.standard.set("Alice", forKey: defaultsKeys.keyOne) // voice
+            UserDefaults.standard.set("", forKey: defaultsKeys.keyTwo) // name
+            UserDefaults.standard.set(6, forKey: defaultsKeys.keyThree) // number of options
+            
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "FirstLogin")
